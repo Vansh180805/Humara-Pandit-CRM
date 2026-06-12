@@ -82,7 +82,7 @@ const seedDB = async () => {
     const consultationsData = [
       {
         clientId: clients[0]._id,
-        date: yesterday,
+        date: today,
         notes: 'Client worried about placement. Placements are delayed. Suggested focusing on technical skills and patience.',
         remedies: {
           gemstones: ['Yellow Sapphire'],
@@ -94,7 +94,7 @@ const seedDB = async () => {
       },
       {
         clientId: clients[1]._id,
-        date: yesterday,
+        date: today,
         notes: 'Discussion about marriage delay. Seventh house Saturn influence causing obstacles. Advised puja remedies.',
         remedies: {
           gemstones: ['Pearl'],
@@ -106,7 +106,7 @@ const seedDB = async () => {
       },
       {
         clientId: clients[6]._id,
-        date: yesterday,
+        date: today,
         notes: 'Career progression consultation. Rahu mahadasha running. Recommended wearing crystal bracelet to channel energy.',
         remedies: {
           gemstones: [],

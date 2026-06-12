@@ -66,6 +66,7 @@ function App() {
           <Dashboard 
             setCurrentTab={setCurrentTab} 
             setSelectedClientId={setSelectedClientId} 
+            user={user}
           />
         );
       case 'clients':
@@ -101,6 +102,7 @@ function App() {
           <Dashboard 
             setCurrentTab={setCurrentTab} 
             setSelectedClientId={setSelectedClientId} 
+            user={user}
           />
         );
     }

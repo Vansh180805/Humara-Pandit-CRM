@@ -31,6 +31,13 @@ exports.getDashboardStats = async (req, res) => {
       followUpStatus: 'Pending'
     });
 
+    // New stats for Admin / Astrologer distinction
+    const totalAppointments = await Appointment.countDocuments();
+    const completedConsultations = await Consultation.countDocuments();
+    const todayAppointments = await Appointment.countDocuments({
+      date: { $gte: startOfToday, $lte: endOfToday }
+    });
+
     // Fetch lists for simple dashboards
     const recentClients = await Client.find().sort({ createdAt: -1 }).limit(5);
     const recentConsultations = await Consultation.find()
@@ -79,7 +86,10 @@ exports.getDashboardStats = async (req, res) => {
           totalClients,
           todayConsultations,
           upcomingAppointments,
-          pendingFollowups
+          pendingFollowups,
+          totalAppointments,
+          completedConsultations,
+          todayAppointments
         },
         recentClients,
         recentConsultations,

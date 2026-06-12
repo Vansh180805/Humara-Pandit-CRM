@@ -90,6 +90,16 @@ const Login = ({ onLoginSuccess }) => {
                 🔮 Login as Astrologer
               </button>
             </div>
+            <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800 text-[10px] space-y-1 text-slate-500 dark:text-slate-400 font-medium">
+              <div className="flex justify-between">
+                <span><strong className="text-slate-700 dark:text-slate-300 font-bold">Admin:</strong> admin@demo.com</span>
+                <span className="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded">Admin@123</span>
+              </div>
+              <div className="flex justify-between">
+                <span><strong className="text-slate-700 dark:text-slate-300 font-bold">Astrologer:</strong> astrologer@demo.com</span>
+                <span className="font-mono bg-slate-100 dark:bg-slate-800 px-1 rounded">Astro@123</span>
+              </div>
+            </div>
           </div>
         )}
 
