@@ -23,12 +23,12 @@ const Login = ({ onLoginSuccess }) => {
         }
         const res = await registerUser(name, email, password);
         if (res.success) {
-          onLoginSuccess(res.data);
+          onLoginSuccess(res.data, res.token);
         }
       } else {
         const res = await login(email, password);
         if (res.success) {
-          onLoginSuccess(res.data);
+          onLoginSuccess(res.data, res.token);
         }
       }
     } catch (err) {

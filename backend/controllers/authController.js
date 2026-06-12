@@ -1,6 +1,14 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
-// @desc    Authenticate user & get token (mock login check)
+// Helper to generate JWT Token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET || 'humara_pandit_secret_key_123_456', {
+    expiresIn: process.env.JWT_EXPIRE || '30d'
+  });
+};
+
+// @desc    Authenticate user & get token
 // @route   POST /api/auth/login
 // @access  Public
 exports.login = async (req, res) => {
@@ -23,8 +31,12 @@ exports.login = async (req, res) => {
       return res.status(401).json({ success: false, error: 'Invalid credentials' });
     }
 
+    // Generate JWT
+    const token = generateToken(user._id);
+
     res.status(200).json({
       success: true,
+      token,
       data: {
         _id: user._id,
         name: user.name,
@@ -62,8 +74,12 @@ exports.register = async (req, res) => {
       role: 'astrologer'
     });
 
+    // Generate JWT
+    const token = generateToken(user._id);
+
     res.status(201).json({
       success: true,
+      token,
       data: {
         _id: user._id,
         name: user.name,

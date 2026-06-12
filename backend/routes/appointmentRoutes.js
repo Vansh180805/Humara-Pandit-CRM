@@ -4,9 +4,10 @@ const {
   getAppointments,
   createAppointment
 } = require('../controllers/appointmentController');
+const { protect } = require('../middleware/authMiddleware');
 
 router.route('/')
-  .get(getAppointments)
-  .post(createAppointment);
+  .get(protect, getAppointments)
+  .post(protect, createAppointment);
 
 module.exports = router;

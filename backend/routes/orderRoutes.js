@@ -6,15 +6,16 @@ const {
   updateOrderStatus,
   getIntegrationLogs
 } = require('../controllers/orderController');
+const { protect } = require('../middleware/authMiddleware');
 
 router.route('/')
-  .get(getOrders)
-  .post(createOrder);
+  .get(protect, getOrders)
+  .post(protect, createOrder);
 
 router.route('/integrations/logs')
-  .get(getIntegrationLogs);
+  .get(protect, getIntegrationLogs);
 
 router.route('/:id')
-  .put(updateOrderStatus);
+  .put(protect, updateOrderStatus);
 
 module.exports = router;

@@ -1,13 +1,33 @@
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+// Helper to get headers with JWT token
+const getHeaders = (includeContentType = false) => {
+  const token = localStorage.getItem('hp_token');
+  const headers = {};
+  
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  
+  if (includeContentType) {
+    headers['Content-Type'] = 'application/json';
+  }
+  
+  return headers;
+};
+
 export const getClients = async (search = '') => {
-  const res = await fetch(`${API_BASE}/clients?search=${encodeURIComponent(search)}`);
+  const res = await fetch(`${API_BASE}/clients?search=${encodeURIComponent(search)}`, {
+    headers: getHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch clients');
   return res.json();
 };
 
 export const getClientById = async (id) => {
-  const res = await fetch(`${API_BASE}/clients/${id}`);
+  const res = await fetch(`${API_BASE}/clients/${id}`, {
+    headers: getHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch client details');
   return res.json();
 };
@@ -15,7 +35,7 @@ export const getClientById = async (id) => {
 export const createClient = async (clientData) => {
   const res = await fetch(`${API_BASE}/clients`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(true),
     body: JSON.stringify(clientData),
   });
   if (!res.ok) {
@@ -28,7 +48,7 @@ export const createClient = async (clientData) => {
 export const updateClient = async (id, clientData) => {
   const res = await fetch(`${API_BASE}/clients/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(true),
     body: JSON.stringify(clientData),
   });
   if (!res.ok) throw new Error('Failed to update client');
@@ -38,6 +58,7 @@ export const updateClient = async (id, clientData) => {
 export const deleteClient = async (id) => {
   const res = await fetch(`${API_BASE}/clients/${id}`, {
     method: 'DELETE',
+    headers: getHeaders()
   });
   if (!res.ok) throw new Error('Failed to delete client');
   return res.json();
@@ -45,7 +66,9 @@ export const deleteClient = async (id) => {
 
 // Appointments
 export const getAppointments = async () => {
-  const res = await fetch(`${API_BASE}/appointments`);
+  const res = await fetch(`${API_BASE}/appointments`, {
+    headers: getHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch appointments');
   return res.json();
 };
@@ -53,7 +76,7 @@ export const getAppointments = async () => {
 export const createAppointment = async (appointmentData) => {
   const res = await fetch(`${API_BASE}/appointments`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(true),
     body: JSON.stringify(appointmentData),
   });
   if (!res.ok) throw new Error('Failed to create appointment');
@@ -63,7 +86,9 @@ export const createAppointment = async (appointmentData) => {
 // Consultations
 export const getConsultations = async (clientId = '') => {
   const url = clientId ? `${API_BASE}/consultations?clientId=${clientId}` : `${API_BASE}/consultations`;
-  const res = await fetch(url);
+  const res = await fetch(url, {
+    headers: getHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch consultations');
   return res.json();
 };
@@ -71,7 +96,7 @@ export const getConsultations = async (clientId = '') => {
 export const createConsultation = async (consultationData) => {
   const res = await fetch(`${API_BASE}/consultations`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getHeaders(true),
     body: JSON.stringify(consultationData),
   });
   if (!res.ok) throw new Error('Failed to save consultation');
@@ -80,7 +105,9 @@ export const createConsultation = async (consultationData) => {
 
 // Dashboard Stats
 export const getDashboardStats = async () => {
-  const res = await fetch(`${API_BASE}/dashboard/stats`);
+  const res = await fetch(`${API_BASE}/dashboard/stats`, {
+    headers: getHeaders()
+  });
   if (!res.ok) throw new Error('Failed to fetch dashboard stats');
   return res.json();
 };

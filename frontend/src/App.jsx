@@ -37,11 +37,12 @@ function App() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const handleLoginSuccess = (userData) => {
+  const handleLoginSuccess = (userData, token) => {
     setIsAuthenticated(true);
     setUser(userData);
     localStorage.setItem('hp_auth', 'true');
     localStorage.setItem('hp_user', JSON.stringify(userData));
+    localStorage.setItem('hp_token', token);
   };
 
   const handleLogout = () => {
@@ -49,6 +50,7 @@ function App() {
     setUser(null);
     localStorage.removeItem('hp_auth');
     localStorage.removeItem('hp_user');
+    localStorage.removeItem('hp_token');
     setCurrentTab('dashboard');
   };
 

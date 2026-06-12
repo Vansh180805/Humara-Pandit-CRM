@@ -4,9 +4,10 @@ const {
   getConsultations,
   createConsultation
 } = require('../controllers/consultationController');
+const { protect } = require('../middleware/authMiddleware');
 
 router.route('/')
-  .get(getConsultations)
-  .post(createConsultation);
+  .get(protect, getConsultations)
+  .post(protect, createConsultation);
 
 module.exports = router;
