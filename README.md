@@ -1,3 +1,4 @@
+https://humara-pandit-crm.vercel.app/
 # 🔮 Humara Pandit - Astrologer CRM & OMS (Order Management System)
 
 A tailored, full-stack Customer Relationship Management (CRM) and Remedy Order Management System (OMS) built to address the business needs of **Humara Pandit (D A Dharm Sathi Private Limited)**. 
